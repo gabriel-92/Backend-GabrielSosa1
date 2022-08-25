@@ -1,0 +1,12 @@
+<%- include('./partials/nav.ejs') %>
+
+
+    <h1>add product</h1>
+
+    <form action="/products" method="post">
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="price" placeholder="price">
+        <input type="text" name="description" placeholder="description">
+        <input type="text" name="image" placeholder="image">
+        <input type="submit" value="add">
+    </form>

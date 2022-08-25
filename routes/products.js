@@ -1,40 +1,51 @@
 const express = require('express');
 const router = express.Router();
-const Contenedor = require("../container/Contenedor");
-const data = new Contenedor();
+const id = 3;
+let listOfProducts = [
+  {
+    id: 1,
+    name: 'Product 1',
+    price: 100
 
-/* getAll (devuleve todos los productos) y si no devuelve un menssaje 
-de error en caso de que no haya productos en ingles*/
-router.get('/', function (req, res, next) {
-  res.send({ data: data.getAll() });
-}
-);
-
-/* getById (devuelve un producto por id) y si no devuelve un menssaje*/
-router.get('/:id', (req, res) => {
-  let obj = data.getById(req.params.id);
-  if (obj.length == 0) {
-    res.send("Product could not be found");
-  } else {
-    res.send({ data: obj });
+  },
+  {
+    id: 2,
+    name: 'Product 2',
+    price: 200
+  },
+  {
+    id: 3,
+    name: 'Product 3',
+    price: 300
   }
-}
-);
+];
 
-router.post("/", ({ body }, res) => {
-  data.addOne(body)
-  res.send({ data: body });
+router.get('/showProducts', (req, res) => {
+  res.render('products', {
+    products: listOfProducts
+  });
+});
+
+router.get('/addProducts', (req, res) => {
+  res.render('addProducts', {
+  });
+});
+
+router.get('/detail/:id', (req, res) => {
+  let id = req.params.id;
+  let myProduct = listOfProducts.filter(p => p.id == id);
+  if (myProduct.length == 0) {
+    return res.send(`Product with id ${id} not found`);
+  }
+  res.send(myProduct)
+})
+
+router.post('/', (req, res) => {
+  let data = req.body;
+  data.id = id++;
+  listOfProducts.push(data);
+  res.redirect('/products/addProducts');
 });
 
 
-router.put("/:id", (req, res, next) => {
-  let id = req.params.id;
-  res.send({ data: req.body });
-}
-);
-router.delete("/:id", (req, res, next) => {
-  let newData = data.deleteById(req.params.id);
-  res.send({ data: newData });
-}
-);
 module.exports = router;

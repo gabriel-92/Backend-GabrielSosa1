@@ -2,27 +2,45 @@
 <html>
 
 <head>
-	<title>
-		<%= title %>
-	</title>
-	<link rel='stylesheet' href='/stylesheets/style.css' />
+   <title>
+      <%= title %>
+   </title>
+   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
-	<h1>
-		<%= title %>
-	</h1>
-	<p>Welcome to <%= title %>
-	</p>
-	<form action="/api/products" method="post">
-		<label>titulo</label>
-		<input type="text" name="title">
-		<label>precio</label>
-		<input type="text" name="price">
-		<label>url</label>
-		<input type="text" name="url">
-		<input type="submit" value="Ingresar Datos">
-	</form>
+   <h1>
+      <%= title %>
+   </h1>
+   <p>Welcome to <%= title %>
+   </p>
+   <h2> list of products</h2>
+   <table>
+      <thead>
+         <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Foto</th>
+         </tr>
+      </thead>
+      <tbody>
+         <% products.forEach(p=> { %>
+            <tr>
+               <td>
+                  <%= p.id %>
+               </td>
+               <td>
+                  <%= p.title %>
+               </td>
+               <td>
+                  <%= p.price %>
+               </td>
+               <td> <a href="/productos/detalle/<%= p.id %>"> <img width="250px" src="<%= p.img %> "></a></td>
+            </tr>
+            <% }) %>
+      </tbody>
+   </table>
 </body>
 
 </html>
