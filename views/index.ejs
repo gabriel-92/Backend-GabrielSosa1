@@ -31,12 +31,15 @@
                   <%= p.id %>
                </td>
                <td>
-                  <%= p.title %>
+                  <%= p.name %>
                </td>
                <td>
                   <%= p.price %>
                </td>
-               <td> <a href="/productos/detalle/<%= p.id %>"> <img width="250px" src="<%= p.img %> "></a></td>
+               <td>
+                  <a href="/products/detail/<%= p.id %>"> <img width="250px" src="<%= p.img %> "></a>
+               </td>
+               </td>
             </tr>
             <% }) %>
       </tbody>

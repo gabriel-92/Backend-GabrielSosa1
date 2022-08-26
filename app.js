@@ -27,7 +27,9 @@ app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    next(createError(404));
+    const createError = require('http-errors');
+    let err = new Error('Not Found');
+    next(createError(404, err));
 });
 
 // error handler

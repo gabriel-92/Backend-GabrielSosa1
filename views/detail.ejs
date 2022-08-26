@@ -1,0 +1,17 @@
+<!-- recibir parametros para mostar los detalles del producto -->
+
+<% if (product) { %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>
+          name of product: <%= product.name %>
+        </h1>
+        <h1>
+          price of product: <%= product.price %>
+        </h1>
+        <img width="250px" src="<%= product.img %> ">
+      </div>
+    </div>
+  </div>
+  <% } %>
