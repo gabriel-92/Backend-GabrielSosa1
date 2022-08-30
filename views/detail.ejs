@@ -1,17 +1,27 @@
-<!-- recibir parametros para mostar los detalles del producto -->
+<%- include('./partials/head.ejs') %>
+  <%- include('./partials/nav.ejs') %>
 
-<% if (product) { %>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>
-          name of product: <%= product.name %>
-        </h1>
-        <h1>
-          price of product: <%= product.price %>
-        </h1>
-        <img width="250px" src="<%= product.img %> ">
+    <% if (product) { %>
+      <div class="container center  mt-5">
+        <!-- <div class="row" style= > -->
+        <div class="col-md-12">
+          <h2 class="text-center">
+            Product Detail
+          </h2>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title fs-2 fw-bold">
+              <%= product.name %>
+            </h5>
+            <p class="card-text fs-3 fw-semibold">
+              <%= product.description %>
+            </p>
+            <p class="card-text fs-3 fw-semibold ">
+              Price : <%= product.price %>
+            </p>
+            <img class="img-thumbnail rounded mx-auto d-block" width="400" src="<%= product.img %> ">
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <% } %>
+      <% } %>

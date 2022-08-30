@@ -1,49 +1,35 @@
-<!DOCTYPE html>
-<html>
+<%- include('./partials/head.ejs') %>
+   <%- include('./partials/nav.ejs') %>
 
-<head>
-   <title>
-      <%= title %>
-   </title>
-   <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
+      <body>
+         <h1 class=" mt-3 text-center">
+            E-comers
+         </h1>
+         <h2 class="ms-5 mb-5"> List of products</h2>
+         <div class="container  justify-content-center">
+            <div class="container row justify-content-center  h-25 mr-5 mb-5">
+               <% products.forEach(p=> { %>
+                  <div class="card col-md-auto  " style="width: 18rem;">
+                     <img src="<%= p.img %>" class="card-img-top" alt="...">
+                     <div class="card-body ">
+                        <h5 class="card-title">
+                           <%= p.name %>
+                        </h5>
+                        <!-- <div class="container  "> -->
+                        <p class="card-text border overflow-auto h-50 ">
+                           <%= p.description %>
+                        </p>
+                        <!-- </div> -->
+                        <a href="/products/detail/<%= p.id %>" class="btn btn-primary">Details</a>
+                     </div>
+                  </div>
+                  <% }) %>
+            </div>
+         </div>
+         <div class="container row justify-content-center">
+            <%- include('./partials/msj.ejs') %>
+         </div>
+         <script src="../js/main.js"></script>
+      </body>
 
-<body>
-   <h1>
-      <%= title %>
-   </h1>
-   <p>Welcome to <%= title %>
-   </p>
-   <h2> list of products</h2>
-   <table>
-      <thead>
-         <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Foto</th>
-         </tr>
-      </thead>
-      <tbody>
-         <% products.forEach(p=> { %>
-            <tr>
-               <td>
-                  <%= p.id %>
-               </td>
-               <td>
-                  <%= p.name %>
-               </td>
-               <td>
-                  <%= p.price %>
-               </td>
-               <td>
-                  <a href="/products/detail/<%= p.id %>"> <img width="250px" src="<%= p.img %> "></a>
-               </td>
-               </td>
-            </tr>
-            <% }) %>
-      </tbody>
-   </table>
-</body>
-
-</html>
+      </html>
