@@ -4,29 +4,10 @@ const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io');
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
-listOfProducts = [
-    {
-        id: 1,
-        name: 'Producto 1',
-        price: 100,
-        img: "https://m.media-amazon.com/images/I/71z6gsI87bL._AC_SL1500_.jpg",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quidem, temporibus, nisi, facere, soluta, vero, deleniti, voluptate harum velit cumque dolores sint iure odio doloribus voluptatem. Quisquam, quidem, temporibus, nisi, facere, soluta, vero, deleniti, voluptate harum velit cumque dolores sint iure odio doloribus voluptatem.'
-    },
-    {
-        id: 2,
-        name: 'Producto 2',
-        price: 200,
-        img: "https://m.media-amazon.com/images/I/71z6gsI87bL._AC_SL1500_.jpg",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quidem, temporibus, nisi, facere, soluta, vero, deleniti, voluptate harum velit cumque dolores sint iure odio doloribus voluptatem. Quisquam, quidem, temporibus, nisi, facere, soluta, vero, deleniti, voluptate harum velit cumque dolores sint iure odio doloribus voluptatem.'
-    },
-    {
-        id: 3,
-        name: 'Producto 3',
-        price: 300,
-        img: "https://m.media-amazon.com/images/I/71z6gsI87bL._AC_SL1500_.jpg",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quidem, temporibus, nisi, facere, soluta, vero, deleniti, voluptate harum velit cumque dolores sint iure odio doloribus voluptatem. Quisquam, quidem, temporibus, nisi, facere, soluta, vero, deleniti, voluptate harum velit cumque dolores sint iure odio doloribus voluptatem.'
-    },
-]
+
+
+const { listOfProducts } = require('./routes/products');
+
 let messages = [
     {
         date: "25/8/2022 23:32:03 ",
@@ -38,7 +19,7 @@ let messages = [
     },
     {
         date: "25/8/2022 23:32:03 ",
-        author: "Ana", text: "Geinal!"
+        author: "Ana", text: "Genial!"
     }
 ]
 const server = httpServer.listen(PORT, () => {
@@ -60,5 +41,10 @@ io.on('connection', (socket) => {
         io.sockets.emit('messages', todo)
 
     })
+    socket.on("new-product", (data) => {
+        listOfProducts = [...listOfProducts, data]
+        console.log(data);
+        let todo = { messages: messages, products: listOfProducts };
+        io.sockets.emit('messages', todo)
+    })
 })
-

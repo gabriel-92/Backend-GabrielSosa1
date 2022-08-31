@@ -35,25 +35,27 @@ router.get('/showProducts', (req, res) => {
     title: "Add Products",
     products: listOfProducts
   });
-}).post('/addProducts', (req, res) => {
-  const { name, price, img, description } = req.body;
-  const newProduct = {
-    id: listOfProducts.length + 1,
-    name,
-    price,
-    img,
-    description
-  }
+})
+  .post('/addProducts', (req, res) => {
+    const newProduct = {
+      id: listOfProducts.length + 1,
+      name: req.body.name,
+      price: req.body.price,
+      img: req.body.img,
+      description: req.body.description
+    }
 
-  listOfProducts.push(newProduct);
-  res.redirect('/products/addProducts');
-}).get('/detail/:id', (req, res) => {
-  const { id } = req.params;
-  const product = listOfProducts.find(product => product.id == id);
-  res.render('detail', {
-    title: "Detail" + " " + product.name,
-    product
+    listOfProducts.push(newProduct);
+    res.redirect('/products/addProducts');
+  }).get('/detail/:id', (req, res) => {
+    const { id } = req.params;
+    const product = listOfProducts.find(product => product.id == id);
+    res.render('detail', {
+      title: "Detail" + " " + product.name,
+      product
+    });
   });
-});
 
 module.exports = router;
+//exportar listOfProducts para que se pueda usar en el main.js
+module.exports.listOfProducts = listOfProducts;
