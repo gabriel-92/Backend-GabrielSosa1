@@ -1,12 +1,12 @@
 const app = require('./app.js')
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io');
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
+// const product = require('./public/mockup/product.json')
 
-
-const { listOfProducts } = require('./routes/products');
+// const listOfProducts = Object.values(product);
 
 let messages = [
     {
@@ -26,6 +26,7 @@ const server = httpServer.listen(PORT, () => {
     console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
 });
 
+
 server.on('error', (error) => console.error(`Error en Servidor ${error}`));
 
 server.on('error', (err) => {
@@ -42,6 +43,7 @@ io.on('connection', (socket) => {
 
     })
     socket.on("new-product", (data) => {
+
         listOfProducts = [...listOfProducts, data]
         console.log(data);
         let todo = { messages: messages, products: listOfProducts };

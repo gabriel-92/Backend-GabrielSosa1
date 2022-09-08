@@ -20,18 +20,27 @@ const render = (data) => {
     }
     const paint = data.products.map((p) => {
         return (
-            `<div class="card col-md-auto  " style="width: 18rem;">
-                        <img src="${p.img}" class="card-img-top" alt="...">
+            `<div class="card col-md-3 "style="
+                            margin: 1rem;">
+                        <img style="height:350px; " src="${p.image}" class="card-img-top" alt="${p.title}" >
                         <div class="card-body ">
-                            <h5 class="card-title">
-                                ${p.name}
-                            </h5>
-                            <div class="container text-truncate   ">
-                                <p class="card-text border  ">
+                            <div style="height:100px;" class="card-title">
+                                <h5>
+                                    ${p.title}
+                                </h5>
+                            </div>
+                            <div class="cart-text overflow-scroll" style="
+                                    height: 10rem;
+                                    overflow: auto;
+                                    scroll-behavior: smooth;">
+                                <p class=" border  rounded-2 p-3 ">
                                     ${p.description}
                                 </p>
                             </div>
-                            <a href="/products/detail/${p.id}" class="btn btn-primary">Details</a>
+                            <div class="card-footer d-flex justify-content-between">
+                                <a href="/detail/${p.id}" class="btn btn-primary">Details</a>
+                                <a href="/products/detail/" class="btn btn-primary">Add to Cart</a>
+                            </div>
                         </div>
                     </div>`)
     }).join('');
